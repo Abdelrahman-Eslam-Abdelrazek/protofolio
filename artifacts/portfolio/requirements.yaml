@@ -1,0 +1,12 @@
+packages:
+  "framer-motion": "For high-performance page animations, scroll reveals, and physics-based interactions"
+  "lucide-react": "For modern crisp iconography"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility for safely merging Tailwind CSS classes"
+
+images: []
+
+notes:
+  - "Pure frontend portfolio application. All data is static and hardcoded."
+  - "Uses Framer Motion for scroll reveals and entry animations."
+  - "Includes custom pure JS pointer implementation."
