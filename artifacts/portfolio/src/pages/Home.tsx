@@ -585,13 +585,13 @@ export default function Home() {
 
         <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
           <ScrollReveal>
-            <h2 className="font-serif text-5xl md:text-7xl font-bold mb-6">Let's Build Something.</h2>
-            <p className="font-sans text-xl text-ink-faint mb-16">
+            <h2 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-white">Let's Build Something.</h2>
+            <p className="font-sans text-xl text-white/70 mb-16">
               Available for freelance, collaborations, and full-time opportunities.
             </p>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-20">
-              <a href="mailto:abdo722005eslam@gmail.com" className="flex items-center gap-3 font-sans text-lg hover:text-ink-faint transition-colors group">
+              <a href="mailto:abdo722005eslam@gmail.com" className="flex items-center gap-3 font-sans text-lg text-white hover:text-white/70 transition-colors group">
                 <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-ink transition-colors">
                   <Mail size={20} />
                 </div>
@@ -619,7 +619,7 @@ export default function Home() {
           </ScrollReveal>
         </div>
         
-        <div className="absolute bottom-6 left-0 right-0 text-center font-mono text-xs text-ink-faint">
+        <div className="absolute bottom-6 left-0 right-0 text-center font-mono text-xs text-white/40">
           © {new Date().getFullYear()} Abdelrahman Eslam Abdelrazek — Designed & Built in Cairo 🇪🇬
         </div>
       </section>
