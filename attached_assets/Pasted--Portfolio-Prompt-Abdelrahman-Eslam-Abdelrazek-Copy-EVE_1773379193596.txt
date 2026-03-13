@@ -1,0 +1,238 @@
+# 🚀 Portfolio Prompt — Abdelrahman Eslam Abdelrazek
+# Copy EVERYTHING below the line and paste it into Replit AI Agent
+
+---
+
+Build me a **world-class, fully responsive personal portfolio website** in a **single HTML file** with all CSS and JS embedded. This must look like it was built by a top-tier design agency — not a template, not a tutorial, not generic AI output. Every pixel must feel intentional. When someone opens this, their first reaction should be: **"Who made this?"**
+
+---
+
+## 🎨 DESIGN DIRECTION — THIS IS THE MOST IMPORTANT PART
+
+### Theme: "Editorial Depth" — White base, ink black, with 3D presence
+
+**Color Palette:**
+```
+--white: #ffffff
+--off-white: #f5f5f3
+--paper: #fafaf8
+--ink: #0a0a0a
+--ink-soft: #1a1a1a
+--ink-muted: #555555
+--ink-faint: #999999
+--accent: #0a0a0a
+--border: #e0e0dc
+--shadow-soft: rgba(0,0,0,0.06)
+--shadow-deep: rgba(0,0,0,0.18)
+```
+
+**NO colors** — no blue, no cyan, no gold, no gradients. Pure black ink on white paper. The drama comes from **depth, shadows, and 3D motion** — not color.
+
+### Typography
+Import from Google Fonts:
+- **"Bebas Neue"** — hero name only, massive, condensed, ultra-bold
+- **"Playfair Display"** — section headings, elegant serif
+- **"DM Sans"** — body text, clean and modern
+- **"JetBrains Mono"** — code snippets, tech badges
+
+### 3D & Animation Style — THIS IS CRITICAL
+The entire portfolio must feel like it exists in **physical space**. Use CSS `perspective`, `transform: translateZ()`, `rotateX()`, `rotateY()` everywhere.
+
+Specific effects required:
+
+1. **Hero section:** The name "ABDELRAHMAN ESLAM" splits into two layers — front layer (solid black) and back layer (gray, slightly offset) creating a real 3D shadow/depth effect. On mouse move, the layers shift slightly with parallax, as if the text physically responds to where you look.
+
+2. **Scroll reveal:** Every section card/element rises from below AND tilts forward slightly as it enters view — like cards being dealt from a deck toward the viewer. Use `transform: perspective(1000px) rotateX(15deg) translateY(60px)` as start state, animate to `rotateX(0deg) translateY(0px)`.
+
+3. **Project cards:** On hover, the card lifts with `translateZ(20px)` and a deep shadow appears beneath it — like picking up a physical card off a table. The card slightly rotates toward your cursor (JS mouse tracking per card, max ±8deg rotation).
+
+4. **Navbar:** Frosted glass with slight shadow. On scroll, a thin black bottom border appears with a subtle drop shadow.
+
+5. **Skill badges:** On hover, each badge pops forward with `translateZ(8px) scale(1.05)` — like pressing a raised button.
+
+6. **Page load:** Staggered entrance — navbar slides down, hero text slams in with a slight overshoot bounce (CSS spring easing), then subtitle fades in, then CTA buttons rise up. Total duration: 1.2 seconds.
+
+7. **Typing animation** on hero subtitle, cycling through:
+   - "Full-Stack Developer"
+   - "Web Security Specialist"  
+   - "Building AI Security Tools"
+
+8. **Custom cursor:** A small solid black circle (12px) that follows the mouse with slight lag (lerp smoothing). On hovering links/buttons, it scales up to 40px and becomes a ring (border only, transparent fill).
+
+---
+
+## 📐 SECTIONS
+
+### 1. NAVBAR
+- Fixed top, full width
+- Left: "AE" monogram in Bebas Neue (bold, 28px)
+- Right: links — About, Skills, Projects, Certifications, Contact
+- Mobile: hamburger menu, smooth slide-down drawer
+- Background: white with `backdrop-filter: blur(8px)`, border-bottom appears on scroll
+
+### 2. HERO — Full viewport height
+- Background: pure white `#ffffff`
+- Very subtle dot grid pattern (SVG background, dots 1px, color #e8e8e8, spacing 28px)
+- Layout: vertically centered
+- Line 1: "ABDELRAHMAN ESLAM" — Bebas Neue, 96px, ink black, 3D split shadow effect
+- Line 2: "ABDELRAZEK" — Bebas Neue, 96px, but outlined/stroked only (no fill, just black stroke 2px) — creates contrast with filled line above
+- Line 3: Typing animation text — DM Sans, 20px, ink-muted color
+- Line 4: Location tag — "📍 Cairo, Egypt"
+- Two CTA buttons below:
+  - Primary: solid black background, white text, "View My Work"
+  - Secondary: white background, black border, black text, "Download CV" (link to GitHub)
+- Bottom right corner: a large faint "01" in Bebas Neue, 300px, color #f0f0f0 — purely decorative, gives editorial feel
+
+### 3. ABOUT ME
+- Background: `--off-white` (#f5f5f3) — slightly different from hero for section separation
+- Two column layout
+- LEFT: 
+  - Small uppercase label: "ABOUT"
+  - Heading: "I build. I secure. I evolve."
+  - Paragraph: "I'm Abdelrahman, a Full-Stack Developer and Web Security Specialist based in Cairo. I don't just build web applications — I harden them. Currently studying Computer Science at Modern Academy Cairo, I'm combining my development skills with cybersecurity expertise and machine learning to build tools that protect the web. My next project: an AI-powered security analyzer that detects real vulnerabilities in web applications."
+  - Education card (glassmorphism-light: white bg, soft shadow, thin border): "Modern Academy Cairo — BSc Computer Science — 2023–2027"
+
+- RIGHT:
+  - A styled "terminal" box — white background, thin black border, monospace font
+  - Content looks like a JSON profile:
+  ```
+  {
+    "name": "Abdelrahman Eslam Abdelrazek",
+    "role": "Full-Stack Dev + Web Security",
+    "location": "Cairo, Egypt 🇪🇬",
+    "currentFocus": "AI Security Tools + ML",
+    "openTo": "Freelance & Collaborations",
+    "funFact": "I build websites then try to break them"
+  }
+  ```
+  - Cursor blink at the end of the last line
+
+### 4. SKILLS
+- Background: white
+- Three columns: **Frontend**, **Backend**, **Security & AI**
+- Column header: small uppercase label + thin black underline
+- Each skill as a pill badge:
+  - Default: white bg, black border, black text, JetBrains Mono font
+  - Hover: black bg, white text, translateZ(8px) pop effect
+
+**Frontend:** HTML5, CSS3, JavaScript, React, Next.js, Tailwind CSS  
+**Backend:** Node.js, Express, PostgreSQL, Supabase, PHP, Python, C++  
+**Security & AI:** Ethical Hacking, Penetration Testing, Vulnerability Assessment, Network Security, Cyber Threat Intelligence, Machine Learning (Learning)
+
+### 5. PROJECTS — Featured Work
+- Background: `--off-white`
+- Section label: "SELECTED WORK"
+- Grid: 2 columns desktop, 1 column mobile
+- Each project card:
+  - White background
+  - Thin black border
+  - Top: project number ("01", "02" etc.) in huge faint Bebas Neue (80px, color #f0f0f0) — decorative
+  - Project name in Playfair Display, 24px, bold
+  - One-line description in DM Sans
+  - Tech stack badges (mini, black border pills)
+  - Bottom: "View Project →" link and GitHub icon link
+  - 3D hover: card lifts + cursor-tracking tilt effect
+
+**Projects:**
+
+1. **EgyRamadan** — Live Arabic movies & series streaming platform with full episode database  
+   Tech: React, Next.js, Tailwind CSS  
+   Live: https://www.egyramadan.me/  
+   GitHub: https://github.com/Abdelrahman-Eslam-Abdelrazek/egyramadan1
+
+2. **StreamSphere** — Movie & series streaming platform with modern UI  
+   Tech: React, Next.js, Tailwind CSS  
+   GitHub: https://github.com/Abdelrahman-Eslam-Abdelrazek/StreamSphere
+
+3. **EgyptianTravelEase** — Tourism booking system with admin dashboard, chat & smart car suggestions  
+   Tech: Next.js, PostgreSQL, Express  
+   GitHub: https://github.com/Abdelrahman-Eslam-Abdelrazek/EgyptianTravelEase
+
+4. **DarkLeakArchive** — Cybersecurity platform with leak archive, forum, leaderboard & chat API  
+   Tech: Node.js, Express, PostgreSQL  
+   GitHub: https://github.com/Abdelrahman-Eslam-Abdelrazek/DarkLeakArchive
+
+5. **ArabicEduPlatform** — Full online learning platform for Arabic educational content  
+   Tech: React, Next.js, Supabase  
+   GitHub: https://github.com/Abdelrahman-Eslam-Abdelrazek/ArabicEduPlatform
+
+6. **AI Security Analyzer** *(Coming Soon)*  
+   AI-powered tool that scans web applications, detects real vulnerabilities, and generates actionable fix reports  
+   Tech: Python, Machine Learning, React  
+   Status badge: "🔨 In Development"
+
+### 6. CERTIFICATIONS
+- Background: white
+- Label: "CREDENTIALS"
+- Grid: 3 columns desktop, 1 mobile
+- Each cert card: white, thin border, soft shadow
+- Card content: cert name (bold), issuer name, date, "View Badge →" link
+- Featured cert gets larger card spanning 2 columns with gold star icon ⭐
+
+**Certifications:**
+1. ⭐ **IBM Cybersecurity Analyst Professional Certificate** — Coursera — Sep 2023  
+   Badge: https://www.credly.com/badges/50f3fb2f-b2de-4d89-9494-195c5ffca673/public_url
+
+2. **Penetration Testing, Incident Response & Forensics** — Coursera — Sep 2023
+3. **Cyber Threat Intelligence** — Coursera — Sep 2023
+4. **Network Security & Database Vulnerabilities** — Coursera — Sep 2023
+5. **Introduction to Cybersecurity** — Cisco — Sep 2023
+6. **Cybersecurity Fundamentals** — IBM SkillsBuild — Sep 2023
+
+### 7. CONTACT
+- Background: ink black (`#0a0a0a`) — only dark section in entire portfolio, creates strong visual contrast
+- ALL text white
+- Heading: "Let's Build Something." in Playfair Display, 56px, white
+- Sub: "Available for freelance, collaborations, and full-time opportunities."
+- Contact details as clean rows with icons:
+  - 📧 abdo722005eslam@gmail.com
+  - 📱 +20 01022543918
+  - 📍 Cairo, Egypt
+- Social links as outlined white buttons:
+  - GitHub
+  - Facebook
+  - Instagram
+- Footer: `© 2025 Abdelrahman Eslam Abdelrazek — Designed & Built in Cairo 🇪🇬`
+
+---
+
+## 📱 RESPONSIVENESS
+
+- Mobile-first CSS
+- Hamburger menu on mobile (animated to X on open)
+- Hero name scales down to 56px on mobile
+- All grids collapse to 1 column on mobile
+- Minimum tap target: 44px
+- Smooth scroll on all anchor links
+
+---
+
+## ⚙️ TECHNICAL REQUIREMENTS
+
+- **Single HTML file** — all CSS and JS embedded inside `<style>` and `<script>` tags
+- Only external resource allowed: Google Fonts CDN link in `<head>`
+- No Bootstrap, no jQuery, no CSS frameworks
+- Use CSS custom properties for all colors and spacing
+- Intersection Observer API for all scroll animations
+- RequestAnimationFrame for smooth cursor tracking
+- Mouse move event listener on each project card for the tilt effect
+- All external links open in `target="_blank" rel="noopener"`
+- Clean, well-commented code
+
+---
+
+## 🚫 ABSOLUTELY DO NOT
+
+- Use any color other than black, white, and shades of gray
+- Use purple gradients or colorful accents
+- Use Inter, Roboto, or Arial fonts
+- Use Bootstrap or jQuery
+- Make it look like any existing template
+- Add placeholder images or stock photos
+- Skip the 3D card tilt effect on projects
+- Skip the parallax hero text effect
+- Make the cursor effect laggy (must use lerp smoothing)
+
+---
+
+Build the complete, production-ready single HTML file now. Make it extraordinary. This portfolio must make anyone who sees it immediately want to hire this developer.
