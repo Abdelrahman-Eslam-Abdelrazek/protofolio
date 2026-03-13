@@ -83,7 +83,7 @@ function ProjectCard({ project, index }: { project: ProjectProps; index: number 
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="bg-white border border-border p-8 md:p-10 transition-transform duration-300 ease-out hover:shadow-deep flex flex-col justify-between h-full group"
+        className="bg-white border border-border p-6 transition-transform duration-300 ease-out hover:shadow-deep flex flex-col justify-between h-full group"
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* Radar Animation for Project 6 */}
@@ -99,10 +99,10 @@ function ProjectCard({ project, index }: { project: ProjectProps; index: number 
         )}
 
         <div style={{ transform: "translateZ(30px)" }}>
-          <div className="text-[80px] md:text-[100px] leading-none text-off-white font-display font-bold select-none mb-4 transition-colors group-hover:text-border">
+          <div className="text-[56px] leading-none text-[#ebebea] font-display font-bold select-none mb-2 transition-colors group-hover:text-border">
             {project.id}
           </div>
-          <h3 className="font-serif text-2xl md:text-3xl font-bold text-ink mb-4 relative z-10">{project.title}</h3>
+          <h3 className="font-serif text-xl font-bold text-ink mb-2 relative z-10">{project.title}</h3>
           
           {project.status && (
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-off-white border border-border rounded-sm text-xs font-mono mb-4 text-ink-muted relative z-10">
@@ -116,21 +116,21 @@ function ProjectCard({ project, index }: { project: ProjectProps; index: number 
             </div>
           )}
           
-          <p className="font-sans text-ink-muted leading-relaxed mb-8">
+          <p className="font-sans text-sm text-ink-muted leading-relaxed mb-5">
             {project.description}
           </p>
         </div>
 
         <div style={{ transform: "translateZ(40px)" }}>
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-1.5 mb-5">
             {project.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 text-xs font-mono border border-ink text-ink bg-white">
+              <span key={tag} className="px-2.5 py-1 text-xs font-mono border border-border text-ink-muted bg-white">
                 {tag}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center gap-6 pt-6 border-t border-border">
+          <div className="flex items-center gap-5 pt-4 border-t border-border">
             {project.liveLink && (
               <a 
                 href={project.liveLink} 
@@ -293,20 +293,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, type: "spring", bounce: 0.35, delay: 0.1 }}
-              className="relative"
             >
-              {/* Back shadow layer */}
               <span
-                className="absolute top-0 left-0 font-display text-[clamp(52px,10vw,112px)] leading-[1] tracking-wide text-ink-faint select-none pointer-events-none"
-                style={{ transform: `translate3d(${heroMousePos.x * 6}px, ${heroMousePos.y * 6 + 5}px, 0)` }}
-                aria-hidden="true"
-              >
-                ABDELRAHMAN ESLAM
-              </span>
-              {/* Front layer */}
-              <span
-                className="relative font-display text-[clamp(52px,10vw,112px)] leading-[1] tracking-wide text-ink block"
-                style={{ transform: `translate3d(${heroMousePos.x * -3}px, ${heroMousePos.y * -3}px, 0)` }}
+                className="font-display text-[clamp(42px,7.5vw,90px)] leading-[1.05] tracking-wide text-ink block"
+                style={{
+                  transform: `translate3d(${heroMousePos.x * -3}px, ${heroMousePos.y * -3}px, 0)`,
+                  textShadow: `${4 + heroMousePos.x * -4}px ${5 + heroMousePos.y * -4}px 0px #ddddd9`,
+                }}
               >
                 ABDELRAHMAN ESLAM
               </span>
@@ -318,8 +311,12 @@ export default function Home() {
               transition={{ duration: 0.9, type: "spring", bounce: 0.35, delay: 0.18 }}
             >
               <span
-                className="font-display text-[clamp(52px,10vw,112px)] leading-[1] tracking-wide text-outline block"
-                style={{ transform: `translate3d(${heroMousePos.x * -2}px, ${heroMousePos.y * -2}px, 0)` }}
+                className="font-display text-[clamp(42px,7.5vw,90px)] leading-[1.05] tracking-wide block"
+                style={{
+                  WebkitTextStroke: "1.5px #0a0a0a",
+                  color: "transparent",
+                  transform: `translate3d(${heroMousePos.x * -2}px, ${heroMousePos.y * -2}px, 0)`,
+                }}
               >
                 ABDELRAZEK
               </span>
@@ -507,14 +504,14 @@ export default function Home() {
       </section>
 
       {/* --- PROJECTS SECTION --- */}
-      <section id="projects" className="py-24 md:py-32 bg-off-white border-t border-border relative overflow-hidden">
+      <section id="projects" className="py-16 md:py-24 bg-off-white border-t border-border relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <ScrollReveal>
-            <p className="font-mono text-sm tracking-widest text-ink-muted uppercase mb-4 text-center md:text-left">Selected Work</p>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-16 text-center md:text-left">Featured Projects</h2>
+            <p className="font-mono text-xs tracking-widest text-ink-muted uppercase mb-3">Selected Work</p>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-10">Featured Projects</h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {projects.map((project, idx) => (
               <ScrollReveal key={project.id} delay={idx % 2 === 0 ? 0.1 : 0.2}>
                 <ProjectCard project={project} index={idx} />
