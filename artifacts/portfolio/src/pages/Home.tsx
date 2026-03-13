@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight, Star, Github, MapPin, Download, Mail, Phone, ExternalLink, ShieldCheck, Code, Server } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
@@ -86,14 +86,32 @@ function ProjectCard({ project, index }: { project: ProjectProps; index: number 
         className="bg-white border border-border p-8 md:p-10 transition-transform duration-300 ease-out hover:shadow-deep flex flex-col justify-between h-full group"
         style={{ transformStyle: "preserve-3d" }}
       >
+        {/* Radar Animation for Project 6 */}
+        {project.id === "06" && (
+          <div className="absolute top-8 right-8 w-16 h-16 text-ink opacity-10 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" style={{ transform: "translateZ(20px)" }}>
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" className="animate-slow-spin" />
+              <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+              <circle cx="50" cy="50" r="15" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+              <path d="M50 50 L50 5" stroke="currentColor" strokeWidth="2" className="origin-center animate-radar" />
+            </svg>
+          </div>
+        )}
+
         <div style={{ transform: "translateZ(30px)" }}>
           <div className="text-[80px] md:text-[100px] leading-none text-off-white font-display font-bold select-none mb-4 transition-colors group-hover:text-border">
             {project.id}
           </div>
-          <h3 className="font-serif text-2xl md:text-3xl font-bold text-ink mb-4">{project.title}</h3>
+          <h3 className="font-serif text-2xl md:text-3xl font-bold text-ink mb-4 relative z-10">{project.title}</h3>
           
           {project.status && (
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-off-white border border-border rounded-sm text-xs font-mono mb-4 text-ink-muted">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-off-white border border-border rounded-sm text-xs font-mono mb-4 text-ink-muted relative z-10">
+              {project.status === "🔨 In Development" && (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ink opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-ink"></span>
+                </span>
+              )}
               {project.status}
             </div>
           )}
@@ -144,12 +162,19 @@ export default function Home() {
   const [heroMousePos, setHeroMousePos] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLElement>(null);
   
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: heroScrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
   
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const heroOpacity = useTransform(heroScrollYProgress, [0, 1], [1, 0]);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -221,6 +246,11 @@ export default function Home() {
 
   return (
     <div className="bg-white min-h-screen">
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-ink origin-left z-50"
+        style={{ scaleX }}
+      />
+
       {/* --- HERO SECTION --- */}
       <motion.section 
         ref={heroRef}
@@ -229,6 +259,23 @@ export default function Home() {
       >
         <div className="absolute bottom-[-5%] right-0 md:right-10 text-[180px] md:text-[350px] leading-none text-off-white font-display pointer-events-none select-none z-0">
           01
+        </div>
+
+        {/* Floating Wireframe Sphere */}
+        <div className="hidden lg:block absolute right-[10%] top-1/2 -translate-y-1/2 w-[400px] h-[400px] pointer-events-none z-0 opacity-80">
+          <div className="w-full h-full animate-slow-spin">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-border stroke-current" strokeWidth="0.2">
+              <circle cx="50" cy="50" r="48" />
+              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(30 50 50)" />
+              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(-30 50 50)" />
+              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(90 50 50)" />
+              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(60 50 50)" />
+              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(-60 50 50)" />
+              <ellipse cx="50" cy="50" rx="15" ry="48" transform="rotate(0 50 50)" />
+              <line x1="2" y1="50" x2="98" y2="50" />
+              <line x1="50" y1="2" x2="50" y2="98" />
+            </svg>
+          </div>
         </div>
 
         <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-10">
@@ -308,12 +355,20 @@ export default function Home() {
       </motion.section>
 
       {/* --- ABOUT SECTION --- */}
-      <section id="about" className="py-24 md:py-32 bg-off-white relative border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section id="about" className="py-24 md:py-32 bg-off-white relative border-t border-border overflow-hidden">
+        {/* Large Decorative Quote */}
+        <div className="absolute top-10 right-10 md:left-10 text-[200px] md:text-[350px] font-serif leading-none text-[#f0f0f0] pointer-events-none select-none z-0 rotate-12">
+          "
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
             <ScrollReveal>
-              <p className="font-mono text-sm tracking-widest text-ink-muted uppercase mb-6">About</p>
+              <p className="font-mono text-sm tracking-widest text-ink-muted uppercase mb-6 flex items-center gap-2">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 0L10 5L5 10L0 5L5 0Z"/></svg>
+                About
+              </p>
               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8">
                 I build. I secure. <br className="hidden md:block"/> I evolve.
               </h2>
@@ -368,15 +423,23 @@ export default function Home() {
       </section>
 
       {/* --- SKILLS SECTION --- */}
-      <section id="skills" className="py-24 md:py-32 bg-white relative">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section id="skills" className="py-24 md:py-32 bg-white relative overflow-hidden">
+        {/* Animated Dots Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 z-0">
+          <div className="absolute top-20 left-[10%] w-4 h-4 rounded-full bg-border animate-pulse-slow"></div>
+          <div className="absolute bottom-40 right-[15%] w-3 h-3 rounded-full bg-border animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/3 right-[5%] w-6 h-6 rounded-full border border-border animate-float"></div>
+          <div className="absolute bottom-20 left-[20%] w-2 h-2 rounded-full bg-ink-faint animate-float" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <ScrollReveal>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-20">Technical Arsenal</h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 perspective-1000" style={{ perspective: "1000px" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 md:divide-x divide-border perspective-1000" style={{ perspective: "1000px" }}>
             {/* Column 1 */}
-            <ScrollReveal delay={0.1}>
+            <ScrollReveal delay={0.1} className="md:pr-8">
               <div className="flex items-center gap-3 mb-8 border-b border-ink pb-4">
                 <Code size={24} className="text-ink" />
                 <h3 className="font-sans text-xl font-bold">Frontend</h3>
@@ -391,7 +454,7 @@ export default function Home() {
             </ScrollReveal>
 
             {/* Column 2 */}
-            <ScrollReveal delay={0.2}>
+            <ScrollReveal delay={0.2} className="md:px-8">
               <div className="flex items-center gap-3 mb-8 border-b border-ink pb-4">
                 <Server size={24} className="text-ink" />
                 <h3 className="font-sans text-xl font-bold">Backend</h3>
@@ -406,7 +469,7 @@ export default function Home() {
             </ScrollReveal>
 
             {/* Column 3 */}
-            <ScrollReveal delay={0.3}>
+            <ScrollReveal delay={0.3} className="md:pl-8">
               <div className="flex items-center gap-3 mb-8 border-b border-ink pb-4">
                 <ShieldCheck size={24} className="text-ink" />
                 <h3 className="font-sans text-xl font-bold">Security & AI</h3>
@@ -498,6 +561,11 @@ export default function Home() {
       <section id="contact" className="py-32 bg-ink text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-dot-grid" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.3) 1px, transparent 1px)" }} />
         
+        {/* Large Decorative @ */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[400px] md:text-[800px] font-sans font-bold leading-none text-white opacity-[0.03] pointer-events-none select-none z-0">
+          @
+        </div>
+
         <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 text-center">
           <ScrollReveal>
             <h2 className="font-serif text-5xl md:text-7xl font-bold mb-6">Let's Build Something.</h2>
