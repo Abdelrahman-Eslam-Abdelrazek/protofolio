@@ -255,102 +255,122 @@ export default function Home() {
       <motion.section 
         ref={heroRef}
         style={{ opacity: heroOpacity }}
-        className="relative min-h-screen flex items-center justify-center pt-20 pb-12 overflow-hidden bg-white bg-dot-grid"
+        className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden bg-white bg-dot-grid"
       >
-        <div className="absolute bottom-[-5%] right-0 md:right-10 text-[180px] md:text-[350px] leading-none text-off-white font-display pointer-events-none select-none z-0">
+        {/* Decorative large "01" bottom right */}
+        <div className="absolute bottom-0 right-0 text-[220px] md:text-[340px] leading-none text-[#f0f0f0] font-display pointer-events-none select-none z-0">
           01
         </div>
 
-        {/* Floating Wireframe Sphere */}
-        <div className="hidden lg:block absolute right-[10%] top-1/2 -translate-y-1/2 w-[400px] h-[400px] pointer-events-none z-0 opacity-80">
-          <div className="w-full h-full animate-slow-spin">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-border stroke-current" strokeWidth="0.2">
-              <circle cx="50" cy="50" r="48" />
-              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(30 50 50)" />
-              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(-30 50 50)" />
-              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(90 50 50)" />
-              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(60 50 50)" />
-              <ellipse cx="50" cy="50" rx="48" ry="15" transform="rotate(-60 50 50)" />
-              <ellipse cx="50" cy="50" rx="15" ry="48" transform="rotate(0 50 50)" />
-              <line x1="2" y1="50" x2="98" y2="50" />
-              <line x1="50" y1="2" x2="50" y2="98" />
-            </svg>
-          </div>
+        {/* Floating Wireframe Sphere — right side desktop */}
+        <div className="hidden lg:block absolute right-[6%] top-1/2 -translate-y-1/2 w-[360px] h-[360px] pointer-events-none z-0 opacity-60">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="0.3" stroke="#d0d0cc" className="w-full h-full animate-slow-spin">
+            <circle cx="50" cy="50" r="48" />
+            <ellipse cx="50" cy="50" rx="48" ry="18" />
+            <ellipse cx="50" cy="50" rx="48" ry="18" transform="rotate(60 50 50)" />
+            <ellipse cx="50" cy="50" rx="48" ry="18" transform="rotate(-60 50 50)" />
+            <ellipse cx="50" cy="50" rx="18" ry="48" />
+            <line x1="2" y1="50" x2="98" y2="50" />
+            <line x1="50" y1="2" x2="50" y2="98" />
+          </svg>
         </div>
 
-        <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-10">
-          <div className="flex flex-col">
+        <div className="max-w-6xl w-full mx-auto px-8 md:px-16 relative z-10">
+
+          {/* Small label */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="font-mono text-xs tracking-[0.25em] text-ink-faint uppercase mb-8"
+          >
+            Portfolio — 2025
+          </motion.p>
+
+          {/* Name block */}
+          <div className="mb-6">
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-              className="relative inline-block mb-2 md:mb-0"
+              transition={{ duration: 0.9, type: "spring", bounce: 0.35, delay: 0.1 }}
+              className="relative"
             >
-              {/* Back Layer Shadow */}
-              <span 
-                className="absolute top-0 left-0 font-display text-[15vw] md:text-9xl text-ink-faint leading-[0.85] md:leading-[0.85] tracking-tight -z-10 w-full"
-                style={{ transform: `translate3d(${heroMousePos.x * 8}px, ${heroMousePos.y * 8 + 4}px, 0)` }}
+              {/* Back shadow layer */}
+              <span
+                className="absolute top-0 left-0 font-display text-[clamp(52px,10vw,112px)] leading-[1] tracking-wide text-ink-faint select-none pointer-events-none"
+                style={{ transform: `translate3d(${heroMousePos.x * 6}px, ${heroMousePos.y * 6 + 5}px, 0)` }}
+                aria-hidden="true"
               >
                 ABDELRAHMAN ESLAM
               </span>
-              {/* Front Layer */}
-              <span 
-                className="relative font-display text-[15vw] md:text-9xl text-ink leading-[0.85] md:leading-[0.85] tracking-tight z-10 w-full inline-block"
-                style={{ transform: `translate3d(${heroMousePos.x * -4}px, ${heroMousePos.y * -4}px, 0)` }}
+              {/* Front layer */}
+              <span
+                className="relative font-display text-[clamp(52px,10vw,112px)] leading-[1] tracking-wide text-ink block"
+                style={{ transform: `translate3d(${heroMousePos.x * -3}px, ${heroMousePos.y * -3}px, 0)` }}
               >
                 ABDELRAHMAN ESLAM
               </span>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.4 }}
+              transition={{ duration: 0.9, type: "spring", bounce: 0.35, delay: 0.18 }}
             >
-              <div 
-                className="font-display text-[15vw] md:text-9xl text-outline leading-[0.85] md:leading-[0.85] tracking-tight"
+              <span
+                className="font-display text-[clamp(52px,10vw,112px)] leading-[1] tracking-wide text-outline block"
                 style={{ transform: `translate3d(${heroMousePos.x * -2}px, ${heroMousePos.y * -2}px, 0)` }}
               >
                 ABDELRAZEK
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="mt-8 mb-12 flex flex-col gap-4"
-            >
-              <div className="font-sans text-xl md:text-2xl text-ink-muted">
-                <Typewriter />
-              </div>
-              <div className="flex items-center gap-2 text-sm font-mono font-medium text-ink bg-off-white w-fit px-3 py-1.5 border border-border">
-                <MapPin size={14} /> Cairo, Egypt
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <a 
-                href="#projects" 
-                className="px-8 py-4 bg-ink text-white font-sans font-bold text-center border border-ink hover:bg-white hover:text-ink transition-all duration-300 transform hover:-translate-y-1 hover:shadow-deep"
-              >
-                View My Work
-              </a>
-              <a 
-                href="https://github.com/Abdelrahman-Eslam-Abdelrazek/egyramadan1" 
-                target="_blank"
-                rel="noreferrer"
-                className="px-8 py-4 bg-white text-ink font-sans font-bold text-center border border-ink hover:bg-off-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-soft flex items-center justify-center gap-2"
-              >
-                <Download size={18} /> Download CV
-              </a>
+              </span>
             </motion.div>
           </div>
+
+          {/* Divider */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="origin-left h-px bg-border w-full max-w-lg mb-8"
+          />
+
+          {/* Subtitle row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mb-12"
+          >
+            <div className="font-sans text-lg md:text-xl text-ink-muted leading-relaxed">
+              <Typewriter />
+            </div>
+            <div className="flex items-center gap-1.5 text-xs font-mono text-ink-faint border border-border px-3 py-1.5 w-fit">
+              <MapPin size={12} /> Cairo, Egypt
+            </div>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.65, type: "spring" }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <a
+              href="#projects"
+              className="inline-flex items-center justify-center px-8 py-3.5 bg-ink text-white font-sans font-semibold text-sm tracking-wide border border-ink hover:bg-ink-soft hover:shadow-deep transition-all duration-300"
+            >
+              View My Work
+            </a>
+            <a
+              href="https://github.com/Abdelrahman-Eslam-Abdelrazek"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-ink font-sans font-semibold text-sm tracking-wide border border-border hover:border-ink hover:bg-off-white transition-all duration-300"
+            >
+              <Download size={16} /> Download CV
+            </a>
+          </motion.div>
         </div>
       </motion.section>
 
