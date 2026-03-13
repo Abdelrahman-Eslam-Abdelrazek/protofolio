@@ -11,6 +11,7 @@
     "build": "pnpm run build:portfolio",
     "build:all": "pnpm run typecheck && pnpm -r --if-present run build",
     "build:portfolio": "pnpm --filter @workspace/portfolio run build",
+    "start": "pnpm --filter @workspace/portfolio run serve",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
